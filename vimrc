@@ -40,6 +40,8 @@ Bundle 'UltiSnips'
 Bundle 'Lokaltog/vim-powerline'
 "
 Bundle 'fholgado/minibufexpl.vim'
+"java 代码补全插件
+Bundle 'javacomplete'
 
 "允许插件required!
 filetype plugin indent on     " required!
@@ -55,7 +57,7 @@ let mapleader = ","
 " Settings for vim-powerline
 set laststatus=2
 " Settings for NERDTree
-nnoremap <C-d> :NERDTreeToggle<cr>
+nnoremap <leader>d :NERDTreeToggle<cr>
 " Settings Mini Buffer
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -70,11 +72,32 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+"根据文件类型及插件设置语法提示
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType java set omnifunc=javacomplete#Complete
+
+
+
+
+
+"=================================
+"快捷键配置
+map <c-j> <c-w>j
+map <c-h> <c-w>h
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+
 
 "==================================
 "设置搜索时忽略大小写
 "    Vim基本配置
 "===================================
+"使vim的配置立即生效
+autocmd! bufwritepost .vimrc source %
 
 "关闭vi的一致性模式 避免以前版本的一些Bug和局限
 set nocompatible

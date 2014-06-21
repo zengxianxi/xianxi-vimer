@@ -42,6 +42,8 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'fholgado/minibufexpl.vim'
 "java 代码补全插件
 Bundle 'javacomplete'
+"打开大文件
+Bundle 'LargeFile'
 
 "允许插件required!
 filetype plugin indent on     " required!
@@ -72,12 +74,28 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" lookupfile setting
+let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
+if filereadable("./filenametags")                "设置tag文件的名字
+let g:LookupFile_TagExpr = '"./filenametags"'
+endif
+"映射LookupFilek
+nmap <silent> <leader>bt :LUTags<cr>
+"映射LUBufsl
+nmap <silent> <leader>bb :LUBufs<cr>
+"映射LUWalkw
+nmap <silent> <leader>bw :LUWalk<cr>
+
 "根据文件类型及插件设置语法提示
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 "autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 "autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType java set omnifunc=javacomplete#Complete
 
 
